@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      .container {
+        height: 100vh;
+        display: flex;
+        gap: 15px;
+        justify-content: center;
+        align-items: center;
+      }
+      .card {
+        width: 200px;
+        height: 280px;
+        position: relative;
+        transform-style: preserve-3d;
+        transition: all ease-in-out 0.5s;
+        box-shadow: 0px 0px 10px #333;
+        /* transition: all 0.5s ease-in-out; */
+      }
+      .flip {
+        transform: rotateY(180deg);
+      }
+      .front {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: lightcoral;
+        color: #000;
+        backface-visibility: hidden;
+        font-size: 50px;
+        text-align: center;
+      }
+      .back {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: lightblue;
+        color: #000;
+        backface-visibility: hidden;
+        transform: rotateY(180deg);
+        font-size: 50px;
+        text-align: center;
+      }
+      @keyframes matchAnime {
+        0% {
+          transform: scale(1);
+          box-shadow: 0px 0px 10px transparent;
+        }
+        50% {
+          transform: scale(1.05);
+          box-shadow: 0px 0px 10px orange;
+        }
+        100% {
+          transform: scale(1);
+          box-shadow: 0px 0px 10px transparent;
+        }
+      }
+      .match {
+        animation: matchAnime 0.8s ease-in-out;
+        /* box-shadow: 0px 0px 10px orange; */
+        /* transform: scale(1.05); */
+      }
+    </style>
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="gameTime"></div>
+    <div class="container">
+      <div class="card isSun">
+        <div class="front">front</div>
+        <div class="back">isSun</div>
+      </div>
+      <div class="card isSun">
+        <div class="front">front</div>
+        <div class="back">isSun</div>
+      </div>
+      <div class="card isMoon">
+        <div class="front">front</div>
+        <div class="back">isMoon</div>
+      </div>
+      <div class="card isMoon">
+        <div class="front">front</div>
+        <div class="back">isMoon</div>
+      </div>
+    </div>
+  </body>
+
+  <script>
+    let firstPick;
+    let secondPick;
+    let isPicked = false;
+    let checking = false;
+    let totalCard = 2;
+    /*------------------------------------variable------------------------------------*/
+
+    const reset = () => [null, null, false, false];
+
+    const match = (firstPick, secondPick) => {
+      if (firstPick.classList.value !== secondPick.classList.value) {
+        checking = true;
+        //期間不能點其他牌
+        setTimeout(() => {
+          firstPick.classList.remove('flip');
+          secondPick.classList.remove('flip');
+          [firstPick, secondPick, isPicked, checking] = reset();
+          //重置
+        }, 600);
+      } else {
+        checking = true;
+        //期間不能點其他牌
+        firstPick.removeEventListener('click', gameCheck);
+        secondPick.removeEventListener('click', gameCheck);
+        totalCard--;
+        console.log(totalCard);
+        setTimeout(() => {
+          firstPick.classList.add('match');
+          secondPick.classList.add('match');
+          [firstPick, secondPick, isPicked, checking] = reset();
+          //重置
+        }, 600);
+      }
+    };
+
+    //這裡用箭頭函式跟傳統函式有不同結果 箭頭函式回傳的this是window 傳統函式回傳的this是card
+    const gameCheck = function () {
+      if (checking) {
+        return;
+      }
+      if (this.classList.length > 2) {
+        return;
+      } else {
+        this.classList.add('flip');
+        // console.log(this.classList);
+        if (!isPicked) {
+          isPicked = true;
+          firstPick = this;
+          //console.log('first:', firstPick);
+        } else {
+          secondPick = this;
+          //console.log('second:', secondPick);
+          console.log('first:', firstPick.classList.value, 'second:', secondPick.classList.value);
+          match(firstPick, secondPick);
+        }
+      }
+    };
+
+    const cards = document.querySelectorAll('.card');
+    cards.forEach((card) => {
+      card.addEventListener('click', gameCheck);
+    });
+  </script>
+</html>
