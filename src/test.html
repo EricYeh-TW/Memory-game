@@ -1,123 +1,122 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <style>
-        body {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+      body {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      #gameTime {
+        font-size: 24px;
+        width: 100%;
+        text-align: center;
+        padding-top: 100px;
+        position: absolute;
+      }
+
+      .container {
+        height: 100vh;
+        display: flex;
+        gap: 15px;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .card {
+        width: 200px;
+        height: 280px;
+        position: relative;
+        transform-style: preserve-3d;
+        transition: all ease-in-out 0.5s;
+        box-shadow: 0px 0px 10px #333;
+        /* transition: all 0.5s ease-in-out; */
+      }
+
+      .flip {
+        transform: rotateY(180deg);
+      }
+
+      .front {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: lightcoral;
+        color: #000;
+        backface-visibility: hidden;
+        font-size: 50px;
+        text-align: center;
+      }
+
+      .back {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: lightblue;
+        color: #000;
+        backface-visibility: hidden;
+        transform: rotateY(180deg);
+        font-size: 50px;
+        text-align: center;
+      }
+
+      @keyframes matchAnime {
+        0% {
+          transform: scale(1);
+          box-shadow: 0px 0px 10px transparent;
         }
 
-        #gameTime {
-            font-size: 24px;
-            width: 100%;
-            text-align: center;
-            padding-top: 100px;
-            position: absolute;
+        50% {
+          transform: scale(1.05);
+          box-shadow: 0px 0px 10px orange;
         }
 
-        .container {
-            height: 100vh;
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            align-items: center;
+        100% {
+          transform: scale(1);
+          box-shadow: 0px 0px 10px transparent;
         }
+      }
 
-        .card {
-            width: 200px;
-            height: 280px;
-            position: relative;
-            transform-style: preserve-3d;
-            transition: all ease-in-out 0.5s;
-            box-shadow: 0px 0px 10px #333;
-            /* transition: all 0.5s ease-in-out; */
-        }
-
-        .flip {
-            transform: rotateY(180deg);
-        }
-
-        .front {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background-color: lightcoral;
-            color: #000;
-            backface-visibility: hidden;
-            font-size: 50px;
-            text-align: center;
-        }
-
-        .back {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background-color: lightblue;
-            color: #000;
-            backface-visibility: hidden;
-            transform: rotateY(180deg);
-            font-size: 50px;
-            text-align: center;
-        }
-
-        @keyframes matchAnime {
-            0% {
-                transform: scale(1);
-                box-shadow: 0px 0px 10px transparent;
-            }
-
-            50% {
-                transform: scale(1.05);
-                box-shadow: 0px 0px 10px orange;
-            }
-
-            100% {
-                transform: scale(1);
-                box-shadow: 0px 0px 10px transparent;
-            }
-        }
-
-        .match {
-            animation: matchAnime 0.8s ease-in-out;
-            /* box-shadow: 0px 0px 10px orange; */
-            /* transform: scale(1.05); */
-        }
+      .match {
+        animation: matchAnime 0.8s ease-in-out;
+        /* box-shadow: 0px 0px 10px orange; */
+        /* transform: scale(1.05); */
+      }
     </style>
     <title>Document</title>
-</head>
+  </head>
 
-<body>
+  <body>
     <div id="gameTime">
-        <span id="sec">00</span>
-        <span>:</span>
-        <span id="ten">00</span>
+      <span id="sec">00</span>
+      <span>:</span>
+      <span id="ten">00</span>
     </div>
     <div class="container">
-        <div class="card isSun">
-            <div class="front">front</div>
-            <div class="back">isSun</div>
-        </div>
-        <div class="card isSun">
-            <div class="front">front</div>
-            <div class="back">isSun</div>
-        </div>
-        <div class="card isMoon">
-            <div class="front">front</div>
-            <div class="back">isMoon</div>
-        </div>
-        <div class="card isMoon">
-            <div class="front">front</div>
-            <div class="back">isMoon</div>
-        </div>
+      <div class="card">
+        <div class="front">front</div>
+        <div class="back"></div>
+      </div>
+      <div class="card">
+        <div class="front">front</div>
+        <div class="back"></div>
+      </div>
+      <div class="card">
+        <div class="front">front</div>
+        <div class="back"></div>
+      </div>
+      <div class="card">
+        <div class="front">front</div>
+        <div class="back"></div>
+      </div>
     </div>
-</body>
+  </body>
 
-<script>
+  <script>
     let firstPick;
     let secondPick;
     let isPicked = false;
@@ -130,97 +129,114 @@
     let appendTen = document.getElementById('ten');
     let appendSec = document.getElementById('sec');
     /*--Time--*/
+    const itemList = ['isSun', 'isMoon'];
+    const listArray = itemList.slice(0).concat(itemList);
+    //把物品清單複製一份然後跟原本的合併
+    /*--Shuffle--*/
 
     const stopWatch = () => {
-        ten++;
-        if (ten <= 9) {
-            appendTen.innerHTML = '0' + ten;
-        }
-        if (ten > 9) {
-            appendTen.innerHTML = ten;
-        }
-        if (ten > 99) {
-            sec++;
-            appendSec.innerHTML = '0' + sec;
-            ten = 0;
-            appendTen.innerHTML = '0' + 0;
-        }
-        if (sec > 9) {
-            appendSec.innerHTML = sec;
-        }
+      ten++;
+      if (ten <= 9) {
+        appendTen.innerHTML = '0' + ten;
+      }
+      if (ten > 9) {
+        appendTen.innerHTML = ten;
+      }
+      if (ten > 99) {
+        sec++;
+        appendSec.innerHTML = '0' + sec;
+        ten = 0;
+        appendTen.innerHTML = '0' + 0;
+      }
+      if (sec > 9) {
+        appendSec.innerHTML = sec;
+      }
     };
 
-    const startGameTime = (totalCard) => {
-        if (totalCard === 0) {
-            clearInterval(interval);
-        } else {
-            clearInterval(interval);
-            interval = setInterval(stopWatch, 10);
-        }
+    const checkGameTime = (totalCard) => {
+      if (totalCard === 0) {
+        clearInterval(interval);
+        //把時間暫停
+      } else {
+        clearInterval(interval);
+        interval = setInterval(stopWatch, 10);
+        //每一毫秒就呼叫一次
+      }
     };
 
     const reset = () => [null, null, false, false];
 
     const match = (firstPick, secondPick) => {
-        if (firstPick.classList.value !== secondPick.classList.value) {
-            checking = true;
-            //期間不能點其他牌
-            setTimeout(() => {
-                firstPick.classList.remove('flip');
-                secondPick.classList.remove('flip');
-                [firstPick, secondPick, isPicked, checking] = reset();
-                //重置
-            }, 600);
-        } else {
-            checking = true;
-            //期間不能點其他牌
-            totalCard--;
-            console.log(totalCard);
-            firstPick.removeEventListener('click', gameCheck);
-            secondPick.removeEventListener('click', gameCheck);
-            startGameTime(totalCard);
+      if (firstPick.classList.value !== secondPick.classList.value) {
+        checking = true;
+        //期間不能點其他牌
+        setTimeout(() => {
+          firstPick.classList.remove('flip');
+          secondPick.classList.remove('flip');
+          [firstPick, secondPick, isPicked, checking] = reset();
+          //重置
+        }, 600);
+      } else {
+        checking = true;
+        //期間不能點其他牌
+        totalCard--;
+        console.log(totalCard);
+        firstPick.removeEventListener('click', gameCheck);
+        secondPick.removeEventListener('click', gameCheck);
+        checkGameTime(totalCard);
+        //遊戲結束 時間停止
 
-            // console.log(totalCard);
-            setTimeout(() => {
-                firstPick.classList.add('match');
-                secondPick.classList.add('match');
-                [firstPick, secondPick, isPicked, checking] = reset();
-                //重置
-            }, 600);
-        }
+        // console.log(totalCard);
+        setTimeout(() => {
+          firstPick.classList.add('match');
+          secondPick.classList.add('match');
+          [firstPick, secondPick, isPicked, checking] = reset();
+          //重置
+        }, 600);
+      }
     };
 
     //這裡用箭頭函式跟傳統函式有不同結果 箭頭函式回傳的this是window 傳統函式回傳的this是card
     const gameCheck = function () {
-        startGameTime(totalCard);
-        if (checking) {
-            return;
-        }
-        if (this.classList.length > 2) {
-            return;
+      checkGameTime(totalCard);
+      //開始計時
+      if (checking) {
+        return;
+      }
+      if (this.classList.length > 2) {
+        return;
+      } else {
+        this.classList.add('flip');
+        // console.log(this.classList);
+        if (!isPicked) {
+          isPicked = true;
+          firstPick = this;
+          //console.log('first:', firstPick);
         } else {
-            this.classList.add('flip');
-            // console.log(this.classList);
-            if (!isPicked) {
-                isPicked = true;
-                firstPick = this;
-                //console.log('first:', firstPick);
-            } else {
-                secondPick = this;
-                //console.log('second:', secondPick);
-                // console.log('first:', firstPick.classList.value, 'second:', secondPick.classList.value);
-                match(firstPick, secondPick);
-            }
+          secondPick = this;
+          //console.log('second:', secondPick);
+          // console.log('first:', firstPick.classList.value, 'second:', secondPick.classList.value);
+          match(firstPick, secondPick);
         }
+      }
+    };
+
+    const shuffle = (card) => {
+      listArray.sort(() => Math.random() - 0.5);
+      //讓listArray隨機排列
+      card.classList.add(listArray[0]);
+      const backs = document.querySelectorAll(`div.${listArray[0]} > .back`);
+      backs.forEach((back) => (back.innerHTML = listArray[0]));
+      //例如 剛剛被賦予isSun的div 它裡面的class back的HTML內容就會是isSun
+      listArray.shift();
+      //第一張牌領完第一個物件後就將這個物件從陣列中刪除
     };
 
     const cards = document.querySelectorAll('.card');
     cards.forEach((card) => {
-        card.addEventListener('click', gameCheck);
+      shuffle(card);
+      //洗牌
+      card.addEventListener('click', gameCheck);
     });
-    cards.forEach(card => {
-        console.log(card.style);
-    })
-</script>
-
+  </script>
 </html>
