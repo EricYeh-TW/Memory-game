@@ -86,6 +86,24 @@
         /* box-shadow: 0px 0px 10px orange; */
         /* transform: scale(1.05); */
       }
+
+      .btn {
+        padding: 20px;
+      }
+
+      .test {
+        width: 100px;
+        height: 100px;
+        background-color: #fa0;
+        margin-left: 500px;
+      }
+      particle {
+        position: fixed;
+        top: 0;
+        left: 0;
+        pointer-events: none;
+        opacity: 0;
+      }
     </style>
     <title>Document</title>
   </head>
@@ -113,6 +131,8 @@
         <div class="front">front</div>
         <div class="back"></div>
       </div>
+      <button class="btn">click</button>
+      <div class="test"></div>
     </div>
   </body>
 
@@ -238,5 +258,59 @@
       //洗牌
       card.addEventListener('click', gameCheck);
     });
+
+    /* ----------------------------------------------------------------*/
+    const createParticle = (x, y) => {
+      const particle = document.createElement('particle');
+      document.body.appendChild(particle);
+
+      const size = Math.floor(Math.random() * 20 + 5);
+      const color = `hsl(${Math.random() * 90 + 90}, 70%, 50%)`;
+      particle.innerHTML = ['⭐', '🎇', '✨'][Math.floor(Math.random() * 3)];
+      particle.style.fontSize = `${Math.random() * 10 + 10}px`;
+      // particle.style.width = `${size}px `;
+      // particle.style.height = `${size}px `;
+      // particle.style.background = `hsl(${Math.random() * 90 + 180}, 70%, 60%)`;
+      // particle.style.boxShadow = `0 0 ${Math.floor(Math.random() * 10 + 10)}px ${color}`;
+
+      const destinationX = x + (Math.random() - 0.5) * 2 * 100;
+      const destinationY = y + (Math.random() - 0.5) * 2 * 100;
+      const animation = particle.animate(
+        [
+          {
+            transform: `translate(${x - size / 2}px, ${y - size / 2}px) rotate(${Math.random() - 0.5 * 90}deg)`,
+            opacity: 1,
+          },
+          {
+            transform: `translate(${destinationX}px, ${destinationY}px) rotate(${(Math.random() - 0.5) * 90 + 360}deg)`,
+            opacity: 0,
+          },
+        ],
+        {
+          // Set a random duration from 500 to 1500ms
+          duration: 1000 + Math.random() * 1000,
+          easing: 'cubic-bezier(0, .9, .57, 1)',
+          // Delay every particle with a random value from 0ms to 200ms
+          delay: Math.random() * 200,
+        }
+      );
+
+      animation.onfinish = () => {
+        particle.remove();
+      };
+    };
+
+    const pop = () => {
+      const item = document.querySelector('.test');
+      const x = (item.getBoundingClientRect().right + item.getBoundingClientRect().left) / 2;
+      const y = (item.getBoundingClientRect().top + item.getBoundingClientRect().bottom) / 2;
+      for (let i = 0; i < 20; i++) {
+        createParticle(x, y);
+      }
+    };
+
+    if (document.body.animate) {
+      document.querySelector('.btn').addEventListener('click', pop);
+    }
   </script>
 </html>
