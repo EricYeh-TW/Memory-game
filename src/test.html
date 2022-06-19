@@ -32,9 +32,8 @@
         height: 280px;
         position: relative;
         transform-style: preserve-3d;
-        transition: all ease-in-out 0.5s;
+        transition: transform ease-in-out 0.5s, box-shadow linear 0.1s;
         box-shadow: 0px 0px 10px #333;
-        /* transition: all 0.5s ease-in-out; */
       }
 
       .flip {
@@ -64,39 +63,26 @@
         text-align: center;
       }
 
-      @keyframes matchAnime {
+      /* @keyframes matchAnime {
         0% {
-          transform: scale(1);
           box-shadow: 0px 0px 10px transparent;
         }
 
         50% {
-          transform: scale(1.05);
           box-shadow: 0px 0px 10px orange;
         }
 
         100% {
-          transform: scale(1);
           box-shadow: 0px 0px 10px transparent;
         }
-      }
+      } */
 
       .match {
-        animation: matchAnime 0.8s ease-in-out;
-        /* box-shadow: 0px 0px 10px orange; */
+        /* animation: matchAnime 0.8s ease-in-out; */
+        box-shadow: 0px 0px 10px orange;
         /* transform: scale(1.05); */
       }
 
-      .btn {
-        padding: 20px;
-      }
-
-      .test {
-        width: 100px;
-        height: 100px;
-        background-color: #fa0;
-        margin-left: 500px;
-      }
       particle {
         position: fixed;
         top: 0;
@@ -131,8 +117,6 @@
         <div class="front">front</div>
         <div class="back"></div>
       </div>
-      <button class="btn">click</button>
-      <div class="test"></div>
     </div>
   </body>
 
@@ -153,6 +137,55 @@
     const listArray = itemList.slice(0).concat(itemList);
     //把物品清單複製一份然後跟原本的合併
     /*--Shuffle--*/
+
+    const createParticle = (x, y) => {
+      const particle = document.createElement('particle');
+      document.body.appendChild(particle);
+      //創立自訂的particle標籤在body下面
+
+      const size = Math.floor(Math.random() * 20 + 5);
+      particle.innerHTML = ['⭐', '🎇', '✨'][Math.floor(Math.random() * 3)];
+      particle.style.fontSize = `${Math.random() * 10 + 10}px`;
+
+      const destinationX = x + (Math.random() - 0.5) * 2 * 100;
+      const destinationY = y + (Math.random() - 0.5) * 2 * 100;
+      //距離生成點往外100px
+      const animation = particle.animate(
+        [
+          {
+            transform: `translate(${x - size / 2}px, ${y - size / 2}px) rotate(${Math.random() - 0.5 * 90}deg)`,
+            opacity: 1,
+          },
+          {
+            transform: `translate(${destinationX}px, ${destinationY}px) rotate(${(Math.random() - 0.5) * 90 + 360}deg)`,
+            opacity: 0,
+          },
+        ],
+        {
+          duration: 1000 + Math.random() * 1000,
+          // 動畫時間
+          easing: 'cubic-bezier(0, .9, .57, 1)',
+          delay: Math.random() * 200,
+          // 動畫延遲
+        }
+      );
+
+      animation.onfinish = () => {
+        particle.remove();
+      };
+    };
+
+    const getParticlePosition = (firstPick, secondPick) => {
+      const firstPositionX = (firstPick.getBoundingClientRect().right + firstPick.getBoundingClientRect().left) / 2;
+      const firstPositionY = (firstPick.getBoundingClientRect().top + firstPick.getBoundingClientRect().bottom) / 2;
+      const secondPositionX = (secondPick.getBoundingClientRect().right + secondPick.getBoundingClientRect().left) / 2;
+      const secondPositionY = (secondPick.getBoundingClientRect().top + secondPick.getBoundingClientRect().bottom) / 2;
+      for (let i = 0; i < 20; i++) {
+        //控制生成的粒子數
+        createParticle(firstPositionX, firstPositionY);
+        createParticle(secondPositionX, secondPositionY);
+      }
+    };
 
     const stopWatch = () => {
       ten++;
@@ -200,7 +233,7 @@
         checking = true;
         //期間不能點其他牌
         totalCard--;
-        console.log(totalCard);
+        //console.log(totalCard);
         firstPick.removeEventListener('click', gameCheck);
         secondPick.removeEventListener('click', gameCheck);
         checkGameTime(totalCard);
@@ -210,6 +243,11 @@
         setTimeout(() => {
           firstPick.classList.add('match');
           secondPick.classList.add('match');
+          if (document.body.animate) {
+            //檢查瀏覽器是否支援 web animation API
+            getParticlePosition(firstPick, secondPick);
+            //取得卡片的中心點
+          }
           [firstPick, secondPick, isPicked, checking] = reset();
           //重置
         }, 600);
@@ -260,57 +298,5 @@
     });
 
     /* ----------------------------------------------------------------*/
-    const createParticle = (x, y) => {
-      const particle = document.createElement('particle');
-      document.body.appendChild(particle);
-
-      const size = Math.floor(Math.random() * 20 + 5);
-      const color = `hsl(${Math.random() * 90 + 90}, 70%, 50%)`;
-      particle.innerHTML = ['⭐', '🎇', '✨'][Math.floor(Math.random() * 3)];
-      particle.style.fontSize = `${Math.random() * 10 + 10}px`;
-      // particle.style.width = `${size}px `;
-      // particle.style.height = `${size}px `;
-      // particle.style.background = `hsl(${Math.random() * 90 + 180}, 70%, 60%)`;
-      // particle.style.boxShadow = `0 0 ${Math.floor(Math.random() * 10 + 10)}px ${color}`;
-
-      const destinationX = x + (Math.random() - 0.5) * 2 * 100;
-      const destinationY = y + (Math.random() - 0.5) * 2 * 100;
-      const animation = particle.animate(
-        [
-          {
-            transform: `translate(${x - size / 2}px, ${y - size / 2}px) rotate(${Math.random() - 0.5 * 90}deg)`,
-            opacity: 1,
-          },
-          {
-            transform: `translate(${destinationX}px, ${destinationY}px) rotate(${(Math.random() - 0.5) * 90 + 360}deg)`,
-            opacity: 0,
-          },
-        ],
-        {
-          // Set a random duration from 500 to 1500ms
-          duration: 1000 + Math.random() * 1000,
-          easing: 'cubic-bezier(0, .9, .57, 1)',
-          // Delay every particle with a random value from 0ms to 200ms
-          delay: Math.random() * 200,
-        }
-      );
-
-      animation.onfinish = () => {
-        particle.remove();
-      };
-    };
-
-    const pop = () => {
-      const item = document.querySelector('.test');
-      const x = (item.getBoundingClientRect().right + item.getBoundingClientRect().left) / 2;
-      const y = (item.getBoundingClientRect().top + item.getBoundingClientRect().bottom) / 2;
-      for (let i = 0; i < 20; i++) {
-        createParticle(x, y);
-      }
-    };
-
-    if (document.body.animate) {
-      document.querySelector('.btn').addEventListener('click', pop);
-    }
   </script>
 </html>
