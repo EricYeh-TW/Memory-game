@@ -31,8 +31,9 @@
         width: 200px;
         height: 280px;
         position: relative;
+        transform: scale3d(1, 1, 1);
         transform-style: preserve-3d;
-        transition: transform ease-in-out 0.5s, box-shadow linear 0.1s;
+        transition: transform ease-in-out 0.5s;
         box-shadow: 0px 0px 10px #333;
       }
 
@@ -63,24 +64,21 @@
         text-align: center;
       }
 
-      /* @keyframes matchAnime {
-        0% {
-          box-shadow: 0px 0px 10px transparent;
-        }
-
-        50% {
+      @keyframes matchAnime {
+        25% {
           box-shadow: 0px 0px 10px orange;
+          transform: scale3d(1.05, 1.05, 1) rotateY(180deg);
         }
-
-        100% {
-          box-shadow: 0px 0px 10px transparent;
+        75% {
+          box-shadow: 0px 0px 10px orange;
+          transform: scale3d(1.05, 1.05, 1) rotateY(180deg);
         }
-      } */
+      }
 
       .match {
-        /* animation: matchAnime 0.8s ease-in-out; */
-        box-shadow: 0px 0px 10px orange;
-        /* transform: scale(1.05); */
+        animation: matchAnime 1s ease;
+        /* box-shadow: 0px 0px 10px orange;
+        transform: scale3d(1.05, 1.05, 1) rotateY(180deg); */
       }
 
       particle {
@@ -259,9 +257,11 @@
       checkGameTime(totalCard);
       //開始計時
       if (checking) {
+        //讓第三張牌不能被點
         return;
       }
       if (this.classList.length > 2) {
+        //讓被點過的牌不能再被點
         return;
       } else {
         this.classList.add('flip');
@@ -296,7 +296,5 @@
       //洗牌
       card.addEventListener('click', gameCheck);
     });
-
-    /* ----------------------------------------------------------------*/
   </script>
 </html>
