@@ -1,0 +1,8 @@
+$main-gradient: linear-gradient(115deg, #8670B6, #82D0B9);
+$second-gradient: linear-gradient(115deg, #82D0B9, #8670B6);
+
+body {
+  width: 100%;
+  height: 100vh;
+  background-image: $main-gradient;
+}
