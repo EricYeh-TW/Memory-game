@@ -3,13 +3,14 @@
 $first-color: #8670B6;
 $second-color: #82D0B9;
 $text-color: #fff;
+$fill-color: rgba($color: $text-color, $alpha: 0.5);
 $main-gradient: linear-gradient(115deg, $first-color, $second-color);
 $second-gradient: linear-gradient(115deg, $second-color, $first-color);
 $font-light: 300;
 $font-normal: 500;
 $font-bold: 700;
-$filter-shadow: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.5));
-$box-shadow: 0px 3px 1px rgba(0, 0, 0, 0.25);
+$filter-shadow: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.25));
+$box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.25);
 
 body{
   box-sizing:border-box;
@@ -17,6 +18,20 @@ body{
   background-image: $main-gradient;
   background-repeat: no-repeat;
   background-attachment: fixed;
+  background-size: cover;
+
+  &::after{
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background-image:url(data:image/svg+xml;base64,CiAgPHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHhtbG5zOnhsaW5rPSdodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rJyB3aWR0aD0nNjUnIGhlaWdodD0nMTA0JyB2aWV3Qm94PScwIDAgMTAgMTYnPgogICAgPGcgaWQ9J2MnPgogICAgICA8cGF0aCBmaWxsPScjZGNkY2RjJyBkPSdNMCAwbDUgM3Y1bC01IC0zeicvPgogIAkJPHBhdGggZmlsbD0nI2YzZjNmMycgZD0nTTEwIDBsLTUgM3Y1bDUgLTMnLz4KICAJPC9nPgogIAk8dXNlIHg9JzUnIHk9JzgnIHhsaW5rOmhyZWY9JyNjJyAvPgogIAk8dXNlIHg9Jy01JyB5PSc4JyB4bGluazpocmVmPScjYycgLz4KICA8L3N2Zz4KICA=);
+    background-attachment: fixed;
+    z-index: -1;
+    opacity: .1;
+  }
 }
 
 .container {
@@ -62,10 +77,10 @@ body{
   font-size: 1.125em;
 }
 .wrap{
-  background-color: rgba($color: $text-color, $alpha: 0.5);
+  background-color: $fill-color;
   border-radius: 20px;
   box-shadow: $box-shadow;
-  // filter: $filter-shadow;
+  min-height: 350px;
   width: 100%;
   color: $text-color;
   display: flex;
@@ -73,11 +88,63 @@ body{
   flex-wrap: wrap;
   justify-content: space-evenly;
   align-content: space-evenly;
+}
+.card{
+  width: 30%;
+  height: 20%;
+  transform-style: preserve-3d;
+  filter: $filter-shadow;
+  position: relative;
+  transition: transform ease-in-out 0.5s;
 
+  .card-front{
+    background-image: $second-gradient;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 15px;
+    outline: 2px solid $fill-color;
+    outline-offset: -0.5em;
+    transform: rotateY(0deg);
+    backface-visibility: hidden;
+    
+    .front-star{
+      background-image: url(../images/Star.svg);
+      background-size: contain;
+      background-position: center;
+      background-repeat: no-repeat;
+      position: absolute;
+      width: 70%;
+      height: 70%;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      margin: auto;
+      backface-visibility: hidden;
+      //絕對定位 + 上下左右為0 + margin auto 來置中
+    }
+  }
+
+  .card-back{
+    position: absolute;
+    background-color: red;
+    border: black 10px solid;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    transform: rotateY(180deg);
+    border-radius: 15px;
+  }
+}
+
+@media only screen and (min-device-width: 769px) {
   .card{
-    background-color: purple;
-    width: 30%;
-    height: 20%;
+    // background-color: purple;
+    width: 15%;
+    height: 30%;
+    filter: $filter-shadow;
+    position: relative;
   }
 }
 .copyright{
@@ -91,4 +158,8 @@ body{
     padding-top: 0.5em;
     border-top: 2px solid $text-color;
   }
+}
+
+.flip{
+  transform: rotateY(180deg);
 }
