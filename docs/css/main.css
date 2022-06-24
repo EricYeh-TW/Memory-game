@@ -2,13 +2,12 @@
 body {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
-  font-family: 'Noto Sans', 'Noto Sans TC', sans-serif;
+  font-family: "Noto Sans", "Noto Sans TC", sans-serif;
   background-image: linear-gradient(115deg, #8670B6, #82D0B9);
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
 }
-
 body::after {
   content: "";
   position: absolute;
@@ -19,7 +18,7 @@ body::after {
   background-image: url(data:image/svg+xml;base64,CiAgPHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHhtbG5zOnhsaW5rPSdodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rJyB3aWR0aD0nNjUnIGhlaWdodD0nMTA0JyB2aWV3Qm94PScwIDAgMTAgMTYnPgogICAgPGcgaWQ9J2MnPgogICAgICA8cGF0aCBmaWxsPScjZGNkY2RjJyBkPSdNMCAwbDUgM3Y1bC01IC0zeicvPgogIAkJPHBhdGggZmlsbD0nI2YzZjNmMycgZD0nTTEwIDBsLTUgM3Y1bDUgLTMnLz4KICAJPC9nPgogIAk8dXNlIHg9JzUnIHk9JzgnIHhsaW5rOmhyZWY9JyNjJyAvPgogIAk8dXNlIHg9Jy01JyB5PSc4JyB4bGluazpocmVmPScjYycgLz4KICA8L3N2Zz4KICA=);
   background-attachment: fixed;
   z-index: -1;
-  opacity: .1;
+  opacity: 0.1;
 }
 
 .container {
@@ -48,12 +47,10 @@ body::after {
   padding-top: 3em;
   text-transform: uppercase;
 }
-
 .title h1 {
   font-size: 3em;
   font-weight: 700;
 }
-
 .title small {
   font-size: 1em;
   display: block;
@@ -95,33 +92,27 @@ body::after {
 }
 
 .card {
+  position: relative;
   width: 30%;
   height: 20%;
   -webkit-transform-style: preserve-3d;
           transform-style: preserve-3d;
-  -webkit-filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.25));
-          filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.25));
-  position: relative;
   -webkit-transition: -webkit-transform ease-in-out 0.5s;
   transition: -webkit-transform ease-in-out 0.5s;
   transition: transform ease-in-out 0.5s;
   transition: transform ease-in-out 0.5s, -webkit-transform ease-in-out 0.5s;
 }
-
 .card .card-front {
   background-image: linear-gradient(115deg, #82D0B9, #8670B6);
-  position: absolute;
   width: 100%;
   height: 100%;
+  position: absolute;
   border-radius: 15px;
   outline: 2px solid rgba(255, 255, 255, 0.5);
   outline-offset: -0.5em;
-  -webkit-transform: rotateY(0deg);
-          transform: rotateY(0deg);
   -webkit-backface-visibility: hidden;
           backface-visibility: hidden;
 }
-
 .card .card-front .front-star {
   background-image: url(../images/Star.svg);
   background-size: contain;
@@ -138,28 +129,18 @@ body::after {
   -webkit-backface-visibility: hidden;
           backface-visibility: hidden;
 }
-
 .card .card-back {
   position: absolute;
-  background-color: red;
-  border: black 10px solid;
+  background-color: #fff;
   width: 100%;
   height: 100%;
+  outline: 2px solid linear-gradient(115deg, #82D0B9, #8670B6);
+  outline-offset: -0.5em;
   -webkit-backface-visibility: hidden;
           backface-visibility: hidden;
   -webkit-transform: rotateY(180deg);
           transform: rotateY(180deg);
   border-radius: 15px;
-}
-
-@media only screen and (min-device-width: 769px) {
-  .card {
-    width: 15%;
-    height: 30%;
-    -webkit-filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.25));
-            filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.25));
-    position: relative;
-  }
 }
 
 .copyright {
@@ -168,7 +149,6 @@ body::after {
   text-align: center;
   font-weight: 300;
 }
-
 .copyright p {
   padding-top: 0.5em;
   border-top: 2px solid #fff;
@@ -177,5 +157,4 @@ body::after {
 .flip {
   -webkit-transform: rotateY(180deg);
           transform: rotateY(180deg);
-}
-/*# sourceMappingURL=main.css.map */
+}/*# sourceMappingURL=main.css.map */
