@@ -2,12 +2,13 @@
 body {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
-  font-family: "Noto Sans", "Noto Sans TC", sans-serif;
+  font-family: 'Noto Sans', 'Noto Sans TC', sans-serif;
   background-image: linear-gradient(115deg, #8670B6, #82D0B9);
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
 }
+
 body::after {
   content: "";
   position: absolute;
@@ -18,7 +19,7 @@ body::after {
   background-image: url(data:image/svg+xml;base64,CiAgPHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHhtbG5zOnhsaW5rPSdodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rJyB3aWR0aD0nNjUnIGhlaWdodD0nMTA0JyB2aWV3Qm94PScwIDAgMTAgMTYnPgogICAgPGcgaWQ9J2MnPgogICAgICA8cGF0aCBmaWxsPScjZGNkY2RjJyBkPSdNMCAwbDUgM3Y1bC01IC0zeicvPgogIAkJPHBhdGggZmlsbD0nI2YzZjNmMycgZD0nTTEwIDBsLTUgM3Y1bDUgLTMnLz4KICAJPC9nPgogIAk8dXNlIHg9JzUnIHk9JzgnIHhsaW5rOmhyZWY9JyNjJyAvPgogIAk8dXNlIHg9Jy01JyB5PSc4JyB4bGluazpocmVmPScjYycgLz4KICA8L3N2Zz4KICA=);
   background-attachment: fixed;
   z-index: -1;
-  opacity: 0.1;
+  opacity: .1;
 }
 
 .container {
@@ -47,10 +48,12 @@ body::after {
   padding-top: 3em;
   text-transform: uppercase;
 }
+
 .title h1 {
   font-size: 3em;
   font-weight: 700;
 }
+
 .title small {
   font-size: 1em;
   display: block;
@@ -105,6 +108,7 @@ body::after {
           box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.25);
   border-radius: 15px;
 }
+
 .card .card-front {
   background-image: linear-gradient(115deg, #82D0B9, #8670B6);
   width: 100%;
@@ -116,6 +120,7 @@ body::after {
   -webkit-backface-visibility: hidden;
           backface-visibility: hidden;
 }
+
 .card .card-front .front-star {
   background-image: url(../images/Star.svg);
   background-size: contain;
@@ -132,6 +137,7 @@ body::after {
   -webkit-backface-visibility: hidden;
           backface-visibility: hidden;
 }
+
 .card .card-back {
   position: absolute;
   background-color: rgba(255, 255, 255, 0.5);
@@ -155,12 +161,14 @@ body::after {
     height: 30%;
   }
 }
+
 .copyright {
   width: 100%;
   color: #fff;
   text-align: center;
   font-weight: 300;
 }
+
 .copyright p {
   padding-top: 0.5em;
   border-top: 2px solid #fff;
@@ -171,26 +179,27 @@ body::after {
           transform: rotateY(180deg);
 }
 
-.hen {
+.isHen {
   background-image: url(../images/hen.png);
 }
 
-.dolphin {
+.isDolphin {
   background-image: url(../images/dolphin.png);
 }
 
-.ducky {
+.isDucky {
   background-image: url(../images/ducky.png);
 }
 
-.jellyfish {
+.isJellyfish {
   background-image: url(../images/jellyfish.png);
 }
 
-.snail {
+.isSnail {
   background-image: url(../images/snail.png);
 }
 
-.toad {
+.isToad {
   background-image: url(../images/toad.png);
-}/*# sourceMappingURL=main.css.map */
+}
+/*# sourceMappingURL=main.css.map */
