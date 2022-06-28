@@ -1,19 +1,66 @@
-// let firstPick;
-// let secondPick;
-// let isPicked = false;
-// let checking = false;
-// let totalCard = 2;
 // /* --gameCheck-- */
+let firstPick;
+let secondPick;
+let isPicked = false;
+let checking = false;
+let totalCard = 6;
+/* --Time-- */
 // let interval;
 // let sec = 0;
 // let ten = 0;
 // let appendTen = document.getElementById('ten');
 // let appendSec = document.getElementById('sec');
-/* --Time-- */
+/* --Shuffle-- */
 const itemList = ['isHen', 'isDolphin', 'isDucky', 'isJellyfish', 'isSnail', 'isToad'];
 const listArray = itemList.slice(0).concat(itemList);
-// 把物品清單複製一份然後跟原本的合併
-/* --Shuffle--*/
+
+// const reset = () => [null, null, false, false];
+
+// const match = (first, second) => {
+//   if (first !== second) {
+//     checking = true;
+//     setTimeout(() => {
+//       first.classList.remove('flip');
+//       second.classList.remove('flip');
+//       [first, second, isPicked, checking] = reset();
+//     }, 600);
+//   } else {
+//     checking = true;
+//     totalCard -= 1;
+//     first.removeEventListener('click', gameCheck);
+//     second.removeEventListener('click', gameCheck);
+//     // checkGameTime(totalCard);
+//     setTimeout(() => {
+//       first.classList.add('match');
+//       second.classList.add('match');
+//       if (document.body.animate) {
+//         // getParticlePosition(first, second);
+//       }
+//       [first, second, isPicked, checking] = reset();
+//     }, 600);
+//   }
+// };
+
+// eslint-disable-next-line func-names
+const gameCheck = function () {
+  // checkGameTime(totalCard);
+  if (checking) {
+    return;
+  }
+  if (this.classList.length > 2) {
+    return;
+  }
+  this.classList.add('flip');
+  if (!isPicked) {
+    isPicked = true;
+    firstPick = this.childNodes[3].classList.value;
+    console.log(firstPick);
+  } else {
+    secondPick = this.childNodes[3].classList.value;
+    console.log(firstPick === secondPick);
+    // match(firstPick, secondPick);
+  }
+};
 
 const shuffle = () => {
   const backs = document.querySelectorAll('.card-back');
@@ -26,9 +73,7 @@ const shuffle = () => {
 
 const cards = document.querySelectorAll('.card');
 cards.forEach((card) => {
-  card.addEventListener('click', () => {
-    card.classList.toggle('flip');
-  });
+  card.addEventListener('click', gameCheck);
 });
 
 shuffle();
