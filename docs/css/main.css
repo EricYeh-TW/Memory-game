@@ -107,6 +107,10 @@ body::after {
   -webkit-box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.25);
           box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.25);
   border-radius: 15px;
+  background-repeat: no-repeat;
+  background-size: 70%;
+  background-position: center;
+  background-color: #fff;
 }
 
 .card .card-front {
@@ -140,10 +144,6 @@ body::after {
 
 .card .card-back {
   position: absolute;
-  background-color: rgba(255, 255, 255, 0.5);
-  background-repeat: no-repeat;
-  background-size: 70%;
-  background-position: center;
   width: 100%;
   height: 100%;
   -webkit-backface-visibility: hidden;
@@ -151,7 +151,7 @@ body::after {
   -webkit-transform: rotateY(180deg);
           transform: rotateY(180deg);
   border-radius: 15px;
-  outline: 2px solid black;
+  outline: 2px solid #333;
   outline-offset: -0.5em;
 }
 
@@ -177,6 +177,41 @@ body::after {
 .flip {
   -webkit-transform: rotateY(180deg);
           transform: rotateY(180deg);
+}
+
+.match {
+  -webkit-animation: matchAnime 1s ease;
+          animation: matchAnime 1s ease;
+}
+
+@-webkit-keyframes matchAnime {
+  25% {
+    -webkit-box-shadow: 0px 0px 10px #ffbb00;
+            box-shadow: 0px 0px 10px #ffbb00;
+    -webkit-transform: scale3d(1.05, 1.05, 1) rotateY(180deg);
+            transform: scale3d(1.05, 1.05, 1) rotateY(180deg);
+  }
+  75% {
+    -webkit-box-shadow: 0px 0px 10px #ffbb00;
+            box-shadow: 0px 0px 10px #ffbb00;
+    -webkit-transform: scale3d(1.05, 1.05, 1) rotateY(180deg);
+            transform: scale3d(1.05, 1.05, 1) rotateY(180deg);
+  }
+}
+
+@keyframes matchAnime {
+  25% {
+    -webkit-box-shadow: 0px 0px 10px #ffbb00;
+            box-shadow: 0px 0px 10px #ffbb00;
+    -webkit-transform: scale3d(1.05, 1.05, 1) rotateY(180deg);
+            transform: scale3d(1.05, 1.05, 1) rotateY(180deg);
+  }
+  75% {
+    -webkit-box-shadow: 0px 0px 10px #ffbb00;
+            box-shadow: 0px 0px 10px #ffbb00;
+    -webkit-transform: scale3d(1.05, 1.05, 1) rotateY(180deg);
+            transform: scale3d(1.05, 1.05, 1) rotateY(180deg);
+  }
 }
 
 .isHen {
