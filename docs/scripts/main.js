@@ -14,6 +14,52 @@ const appendSec = document.querySelector('.time-second');
 const itemList = ['isHen', 'isDolphin', 'isDucky', 'isJellyfish', 'isSnail', 'isToad'];
 const listArray = itemList.slice(0).concat(itemList);
 
+const createParticle = (x, y) => {
+  const particle = document.createElement('particle');
+  document.body.appendChild(particle);
+
+  const size = Math.floor(Math.random() * 20 + 5);
+  particle.innerHTML = ['⭐'];
+  particle.style.fontSize = `${Math.random() * 10 + 10}px`;
+
+  const destinationX = x + (Math.random() - 0.5) * 2 * 90;
+  const destinationY = y + (Math.random() - 0.5) * 2 * 90;
+  const animation = particle.animate(
+    [
+      {
+        transform: `translate(${x - size / 2}px, ${y - size / 2}px) rotate(${Math.random() - 0.5 * 90}deg)`,
+        opacity: 1,
+      },
+      {
+        transform: `translate(${destinationX}px, ${destinationY}px) rotate(${(Math.random() - 0.5) * 90 + 360}deg)`,
+        opacity: 0,
+      },
+    ],
+    {
+      duration: 1000 + Math.random() * 1000,
+      // 動畫時間
+      easing: 'cubic-bezier(0, .9, .57, 1)',
+      delay: Math.random() * 200,
+      // 動畫延遲
+    },
+  );
+
+  animation.onfinish = () => {
+    particle.remove();
+  };
+};
+
+const getParticlePosition = (first, second) => {
+  const firstX = (first.getBoundingClientRect().right + first.getBoundingClientRect().left) / 2;
+  const firstY = (first.getBoundingClientRect().top + first.getBoundingClientRect().bottom) / 2;
+  const secondX = (second.getBoundingClientRect().right + second.getBoundingClientRect().left) / 2;
+  const secondY = (second.getBoundingClientRect().top + second.getBoundingClientRect().bottom) / 2;
+  for (let i = 0; i < 15; i += 1) {
+    createParticle(firstX, firstY);
+    createParticle(secondX, secondY);
+  }
+};
+
 const stopWatch = () => {
   ten += 1;
   if (ten <= 9) {
@@ -42,7 +88,9 @@ const checkGameTime = (total) => {
   }
 };
 
-const reset = () => [null, null, false, false];
+const reset = () => {
+  [firstPick, secondPick, isPicked, checking] = [null, null, false, false];
+};
 
 const match = (first, second) => {
   if (firstPick.classList.value !== secondPick.classList.value) {
@@ -50,7 +98,7 @@ const match = (first, second) => {
     setTimeout(() => {
       first.classList.remove('flip');
       second.classList.remove('flip');
-      [first, second, isPicked, checking] = reset();
+      reset();
     }, 600);
   } else {
     checking = true;
@@ -62,9 +110,9 @@ const match = (first, second) => {
       first.classList.add('match');
       second.classList.add('match');
       if (document.body.animate) {
-        // getParticlePosition(first, second);
+        getParticlePosition(first, second);
       }
-      [first, second, isPicked, checking] = reset();
+      reset();
     }, 600);
   }
 };
