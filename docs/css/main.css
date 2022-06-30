@@ -3,14 +3,14 @@ body {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   font-family: 'Noto Sans', 'Noto Sans TC', sans-serif;
-  background-image: linear-gradient(115deg, #8670B6, #82D0B9);
+  background-image: linear-gradient(115deg, #8670b6, #82d0b9);
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
 }
 
 body::after {
-  content: "";
+  content: '';
   position: absolute;
   width: 100%;
   height: 100%;
@@ -19,7 +19,7 @@ body::after {
   background-image: url(data:image/svg+xml;base64,CiAgPHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHhtbG5zOnhsaW5rPSdodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rJyB3aWR0aD0nNjUnIGhlaWdodD0nMTA0JyB2aWV3Qm94PScwIDAgMTAgMTYnPgogICAgPGcgaWQ9J2MnPgogICAgICA8cGF0aCBmaWxsPScjZGNkY2RjJyBkPSdNMCAwbDUgM3Y1bC01IC0zeicvPgogIAkJPHBhdGggZmlsbD0nI2YzZjNmMycgZD0nTTEwIDBsLTUgM3Y1bDUgLTMnLz4KICAJPC9nPgogIAk8dXNlIHg9JzUnIHk9JzgnIHhsaW5rOmhyZWY9JyNjJyAvPgogIAk8dXNlIHg9Jy01JyB5PSc4JyB4bGluazpocmVmPScjYycgLz4KICA8L3N2Zz4KICA=);
   background-attachment: fixed;
   z-index: -1;
-  opacity: .1;
+  opacity: 0.1;
 }
 
 .container {
@@ -115,7 +115,7 @@ body::after {
 }
 
 .card .card-front {
-  background-image: linear-gradient(115deg, #82D0B9, #8670B6);
+  background-image: linear-gradient(115deg, #82d0b9, #8670b6);
   width: 100%;
   height: 100%;
   position: absolute;
@@ -247,4 +247,3 @@ particle {
 .isToad {
   background-image: url(../images/toad.png);
 }
-/*# sourceMappingURL=main.css.map */
