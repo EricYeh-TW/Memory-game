@@ -2,15 +2,14 @@
 body {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
-  font-family: 'Noto Sans', 'Noto Sans TC', sans-serif;
+  font-family: Arial, "Noto Sans", "Noto Sans TC", sans-serif;
   background-image: linear-gradient(115deg, #8670b6, #82d0b9);
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
 }
-
 body::after {
-  content: '';
+  content: "";
   position: absolute;
   width: 100%;
   height: 100%;
@@ -48,12 +47,10 @@ body::after {
   padding-top: 3em;
   text-transform: uppercase;
 }
-
 .title h1 {
   font-size: 3em;
   font-weight: 700;
 }
-
 .title small {
   font-size: 1em;
   display: block;
@@ -113,7 +110,6 @@ body::after {
   background-color: #fff;
   margin: 0 0.1em;
 }
-
 .card .card-front {
   background-image: linear-gradient(115deg, #82d0b9, #8670b6);
   width: 100%;
@@ -125,7 +121,6 @@ body::after {
   -webkit-backface-visibility: hidden;
           backface-visibility: hidden;
 }
-
 .card .card-front .front-star {
   background-image: url(../images/Star.svg);
   background-size: contain;
@@ -142,7 +137,6 @@ body::after {
   -webkit-backface-visibility: hidden;
           backface-visibility: hidden;
 }
-
 .card .card-back {
   position: absolute;
   width: 100%;
@@ -163,14 +157,12 @@ body::after {
     background-size: 55%;
   }
 }
-
 .copyright {
   width: 100%;
   color: #fff;
   text-align: center;
   font-weight: 300;
 }
-
 .copyright p {
   padding-top: 0.5em;
   border-top: 2px solid #fff;
@@ -215,7 +207,6 @@ body::after {
             transform: scale3d(1.05, 1.05, 1) rotateY(180deg);
   }
 }
-
 particle {
   position: fixed;
   top: 0;
