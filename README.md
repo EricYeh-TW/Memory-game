@@ -14,6 +14,4 @@
 
 [連結](https://ericyeh-tw.github.io/Memory-game/)
 
-<img src="screenshot\pic1.jpg" alt="手機預覽" title="手機預覽" width="30%" style="display:inline-block; float:left;">
-
-<img src="screenshot\pic2.jpg" alt="平板預覽" title="平板預覽" width="60%" style="display:inline-block; float:right;">
+<img src="screenshot\pic1.jpg" alt="手機預覽" title="手機預覽" width="30%"><img src="screenshot\pic2.jpg" alt="平板預覽" title="平板預覽" width="60%">
